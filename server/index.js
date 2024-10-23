@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
       progress += 10;
       socket.emit('progress', { progress });
       console.log("Progress: ", progress);
-      sleepFor(3000);
+      sleepFor(4000);
     }
 
     socket.emit('complete', { message: 'Process complete!' });

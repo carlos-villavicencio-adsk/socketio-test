@@ -51,4 +51,4 @@ if __name__ == "__main__":
 
     socketIO.emit("execute_command", {'message': 'Please give me data!'})
     while True:
-        wait_for_response(socketIO, single_loop=False, process_events=False)
+        wait_for_response(socketIO, single_loop=True, process_events=False)
