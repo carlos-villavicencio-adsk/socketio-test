@@ -41,10 +41,9 @@ io.on('connection', (socket) => {
 
   // Listen for a custom event from the client
   socket.on('execute_command', (data) => {
+    console.log(`Received message from client: ${data.message}`);
     socket.emit('server_response', { message: 'Message received' });
-      simulateBigProcess();
-      console.log(`Received message from client: ${data.message}`);
-      // Optionally, send a response back to the client
+    simulateBigProcess();
   });
 
   // When the client disconnects
