@@ -27,8 +27,6 @@ def process_new_messages(socketIO, wait=0.01, single_loop=False, process_events=
             while wait >= (time.time() - start) or single_loop:
                 try:
                     socketIO._process_packets()
-                except IndexError as e:
-                    print(f"IndexError: {e}")
                 except TimeoutError:
                     # print("Expected timeout")
                     ...
@@ -46,7 +44,6 @@ if __name__ == "__main__":
     socketIO.on("return", data_callback("return"))
     socketIO.on("disconnect", data_callback("disconnect"))
     socketIO.on("progress", data_callback("progress"))
-    socketIO.on("complete", data_callback("complete"))
     socketIO.on("server_response", data_callback("server_response"))
 
     socketIO.emit("execute_command", {'message': 'Please give me data!'})
