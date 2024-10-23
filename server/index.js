@@ -9,7 +9,10 @@ const app = express();
 const server = http.createServer(app);
 
 // Bind Socket.IO to the server
-const io = socketIo(server);
+const io = socketIo(server, {
+  pingTimeout: 60000, // default was 5000ms
+  pingInterval: 25000, // default is 25000ms
+});
 
 // Utility function for delay
 function sleepFor(sleepDuration){
@@ -31,12 +34,12 @@ io.on('connection', (socket) => {
     while (progress < 100) {
       // Simulate work
       progress += 10;
-      socket.emit('progress', { progress });
+      // socket.emit('progress', { progress });
       console.log("Progress: ", progress);
       sleepFor(4000);
     }
 
-    socket.emit('complete', { message: 'Process complete!' });
+    socket.emit('return', { message: 'Process complete!' });
   };
 
   // Listen for a custom event from the client
